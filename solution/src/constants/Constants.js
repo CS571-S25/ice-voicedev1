@@ -1,7 +1,7 @@
 const Constants = {
-    MsgType: {
-        AI: "ai",
-        Human: "human"
+    Roles: {
+        User: "user",
+        Assistant: "assistant"
     }
 }
 

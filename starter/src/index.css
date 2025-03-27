@@ -24,7 +24,7 @@
   min-width: 250px;
 }
 
-.human-message {
+.user-message {
   background-color: white;
   padding: 8px 8px 0 8px;
   margin-right: 0.5rem;
@@ -35,7 +35,7 @@
   text-align: right;
 }
 
-.ai-message {
+.assistant-message {
   background-color: lightblue;
   padding: 8px 8px 0 8px;
   margin-left: 0.5rem;

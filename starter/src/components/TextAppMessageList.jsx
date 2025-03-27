@@ -17,7 +17,7 @@ export default function TextAppMessageList({messages}) {
                 key={i}
                 style={{marginBottom: "0.25rem"}}
             >
-                <Message type={message.type} text={message.text}/>
+                <Message role={message.role} content={message.content}/>
             </Row>
         ))}
     </Container>

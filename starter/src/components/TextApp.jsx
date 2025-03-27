@@ -16,32 +16,32 @@ function TextApp() {
 
     async function handleWelcome() {
         const msg = await chatAgent.handleInitialize();
-        addMessage(msg, Constants.MsgType.AI);
+        addMessage(Constants.Roles.Assistant, msg);
     }
 
     async function handleSend(e) {
         e?.preventDefault();
         const input = inputRef.current.value?.trim();
         if (input) {
-            addMessage(input, Constants.MsgType.Human);
+            addMessage(Constants.Roles.User, input);
             inputRef.current.value = "";
             setIsLoading(true);
             const resp = await chatAgent.handleReceive(input);
             if(Array.isArray(resp)) {
                 for(let msg of resp) { 
-                    addMessage(msg, Constants.MsgType.AI);
+                    addMessage(Constants.Roles.Assistant, msg);
                 }
             } else {
-                addMessage(resp, Constants.MsgType.AI);
+                addMessage(Constants.Roles.Assistant, resp);
             }
             setIsLoading(false);
         }
     };
 
-    function addMessage(text, type) {
+    function addMessage(role, content) {
         setMessages(o => [...o, {
-            text: text,
-            type: type
+            role: role,
+            content: content
         }]);
     }
 

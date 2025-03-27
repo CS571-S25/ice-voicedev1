@@ -1,7 +1,7 @@
 
 const createChatAgent = () => {
 
-    const CS571_WITAI_ACCESS_TOKEN = "WDATN4VZ7OT5HR5DZUGL5MZQ6WYNL27B"; // Put your CLIENT access token here.
+    const CS571_WITAI_ACCESS_TOKEN = ""; // Put your CLIENT access token here.
 
     let jokeNum = 0;
 
