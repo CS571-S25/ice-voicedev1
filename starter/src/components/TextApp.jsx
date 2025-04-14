@@ -1,43 +1,42 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { BeatLoader } from 'react-spinners';
 
 import TextAppMessageList from './TextAppMessageList';
 import Constants from '../constants/Constants';
-import createChatAgent from '../agent/ChatAgent';
+
+const CS571_WITAI_ACCESS_TOKEN = ""; // Put your CLIENT access token here.
 
 function TextApp() {
 
-    const chatAgent = useMemo(() => createChatAgent(), []);
-
+    // Set to true to block the user from sending another message
     const [isLoading, setIsLoading] = useState(false);
+
     const [messages, setMessages] = useState([]);
     const inputRef = useRef();
 
+    /**
+     * Called when the TextApp initially mounts.
+     */
     async function handleWelcome() {
-        const msg = await chatAgent.handleInitialize();
-        addMessage(Constants.Roles.Assistant, msg);
+
     }
 
+    /**
+     * Called whenever the "Send" button is pressed.
+     * @param {Event} e default form event; used to prevent from reloading the page.
+     */
     async function handleSend(e) {
         e?.preventDefault();
         const input = inputRef.current.value?.trim();
-        if (input) {
-            addMessage(Constants.Roles.User, input);
-            inputRef.current.value = "";
-            setIsLoading(true);
-            const resp = await chatAgent.handleReceive(input);
-            if(Array.isArray(resp)) {
-                for(let msg of resp) { 
-                    addMessage(Constants.Roles.Assistant, msg);
-                }
-            } else {
-                addMessage(Constants.Roles.Assistant, resp);
-            }
-            setIsLoading(false);
-        }
-    };
+    }
 
+    /**
+     * Adds a message to the ongoing TextAppMessageList
+     * 
+     * @param {string} role The role of the message; either "user" or "assistant"
+     * @param {*} content The content of the message
+     */
     function addMessage(role, content) {
         setMessages(o => [...o, {
             role: role,
